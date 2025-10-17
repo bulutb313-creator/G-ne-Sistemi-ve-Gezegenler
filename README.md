@@ -38,4 +38,5 @@ Bu projenin yerel bir makinede çalıştırılması için gerekli adımlar:
 
 ### Web Linkiniz
 
-[(https://anabelle-monadistic-tomoko.ngrok-free.dev/)]
+[https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
