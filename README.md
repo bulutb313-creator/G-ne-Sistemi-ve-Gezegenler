@@ -66,9 +66,10 @@ Projenin RAG mimarisi, yüksek performans ve doğru bağlam çekimini garanti et
     2.  **Halüsinasyon Testi:** Kaynak dışı sorgulara , **"Bu konuda elimde yeterli bilgi yok."** yanıtını vererek sistemin güvenilirliği kanıtlanır.
 
 
-### Web Linkiniz
+### Web Linki
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
