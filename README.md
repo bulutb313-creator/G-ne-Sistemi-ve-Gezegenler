@@ -17,7 +17,7 @@ Bu proje, Akbank GenAI Bootcamp'in zorunlu gereksinimi olan **Retrieval Augmente
 * **Veri Kaynağı:** Dr. Begüm Çıvgın'ın "GENEL JEOFIZIK" ders notları (`sistem.pdf`) kullanılmıştır.
 * **Hazırlanış Metodolojisi (Kritik Çözüm):**
     * **Metin Çıkarımı:** PDF'ten metin çıkarımı, hataları önlemek için daha sağlam olan **`pdfplumber`** ile yapılmıştır.
-    * **Parçalama:** Metin, **`RecursiveCharacterTextSplitter`** kullanılarak 1000 karakter boyutu ve 200 karakter örtüşme (overlap) ile parçalara (chunks) ayrılmıştır.
+    * **Parçalama:** Metin, **`RecursiveCharacterTextSplitter`** kullanılarak 1000 karakter boyutu ve 200 karakter örtüşme (overlap) ile parçalara (chunks) ayrılmıştır. Bu sayede, tüm metin (yaklaşık 41 parça) başarıyla işlenmiştir.
 
 ---
 
@@ -63,6 +63,7 @@ Bu aşama, kodun başka bir ortamda çalıştırılması için gereken tüm adı
 ### Web Linki
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
