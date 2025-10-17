@@ -61,10 +61,13 @@ Bu aşama, kodun başka bir ortamda çalıştırılması için gereken tüm adı
 
 <img width="1898" height="738" alt="image" src="https://github.com/user-attachments/assets/cd2e16ca-d7fd-459f-83a7-027511d81d40" />
 
+<img width="978" height="747" alt="image" src="https://github.com/user-attachments/assets/60f27ceb-b62e-4475-9694-5f5f2dcbfe46" />
+
 
 ### WEB LİNKİ
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
