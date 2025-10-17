@@ -1,7 +1,7 @@
 # 🚀 GÜNEŞ SİSTEMİ VE GEZEGENLER RAG CHATBOTU 🪐
 
 ### PROJENİN GENEL ÖZETİ
-Bu proje, Akbank GenAI Bootcamp'in temel gereksinimi olan **Retrieval Augmented Generation (RAG)** mimarisi üzerine inşa edilmiştir. Geliştirilen chatbot, bilimsel bir kaynak olan **sistem.pdf** içeriğini kullanarak, kullanıcılardan gelen sorgulara yüksek doğruluk ve bağlamsal zenginlikte yanıtlar üretmektedir. Projenin temel başarısı, bir dil modelini (Gemini) *sadece* kaynağa dayandırarak halüsinasyon riskini ortadan kaldırmasıdır.
+Bu proje, Akbank GenAI Bootcamp'in temel gereksinimi olan **Retrieval Augmented Generation (RAG)** mimarisi üzerine inşa edilmiştir. Geliştirilen chatbot, bilimsel bir kaynak olan **sistem.pdf** içeriğini kullanarak, kullanıcılardan gelen sorgulara yüksek doğruluk ve bağlamsal zenginlikte yanıtlar üretmektedir. Projenin temel başarısı, bir dil modelini (Gemini) kaynağa dayandırarak halüsinasyon riskini ortadan kaldırmasıdır.
 
 ---
 
@@ -69,6 +69,7 @@ Projenin RAG mimarisi, yüksek performans ve doğru bağlam çekimini garanti et
 ### Web Linkiniz
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
