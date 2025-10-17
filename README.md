@@ -47,3 +47,4 @@ Bu projenin yerel bir makinede çalıştırılması için gerekli adımlar:
 
 
 
+
