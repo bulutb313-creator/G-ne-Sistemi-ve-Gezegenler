@@ -65,3 +65,4 @@ Bu RAG chatbotu, uygulanan optimizasyonlar sayesinde en zorlu sorulara bile yük
 
 
 
+
