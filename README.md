@@ -1,6 +1,6 @@
 # 🚀 GÜNEŞ SİSTEMİ VE GEZEGENLER RAG CHATBOTU 🪐
 
-<img width="1097" height="900" alt="image" src="https://github.com/user-attachments/assets/a8d3bc2d-12ba-49ba-a1f8-9b903980b637" />
+<img width="800" height="900" alt="image" src="https://github.com/user-attachments/assets/a8d3bc2d-12ba-49ba-a1f8-9b903980b637" />
 
 
 ### PROJENİN GENEL ÖZETİ
@@ -63,9 +63,11 @@ Bu aşama, kodun başka bir ortamda çalıştırılması için gereken tüm adı
     * **Halüsinasyon Testi:** Kaynak dışı sorgulara , **"Bu konuda elimde yeterli bilgi yok."** yanıtını vererek sistemin güvenilirliği kanıtlanır.
 
 
+
 ### WEB LİNKİ
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
