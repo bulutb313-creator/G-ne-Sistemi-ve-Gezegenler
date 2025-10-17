@@ -54,7 +54,7 @@ Bu aşama, kodun başka bir ortamda çalıştırılması için gereken tüm adı
 ### 5 - WEB ARAYÜZÜ & PRODUCT KILAVUZU
 
 * **Arayüz Teknolojisi:** Streamlit.
-* **Deploy Linki:** Canlı web adresi (`https://...`) bu `README.md`'nin sonunda paylaşılmıştır.
+* **Deploy Linki:** Canlı web adresi (https://anabelle-monadistic-tomoko.ngrok-free.dev/) bu `README.md`'nin sonunda paylaşılmıştır.
 * **Kabiliyetlerin Testi:**
     * **Sentez Testi:** Model, birden fazla kaynaktan bilgi çekip birleştirerek ("Gezegenleri büyükten küçüğe sırala ve Dünya'nın dış katmanlarını anlat.") detaylı cevaplar üretir.
     * **Halüsinasyon Testi:** Kaynak dışı sorgulara , **"Bu konuda elimde yeterli bilgi yok."** yanıtını vererek sistemin güvenilirliği kanıtlanır.
@@ -63,6 +63,7 @@ Bu aşama, kodun başka bir ortamda çalıştırılması için gereken tüm adı
 ### Web Linki
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
