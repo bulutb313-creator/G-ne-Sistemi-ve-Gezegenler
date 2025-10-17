@@ -1,7 +1,7 @@
 # Jeofizik ve Uzay Bilimleri RAG Chatbotu
 
 ### 1 - Projenin Amacı
-[cite_start]Bu proje, RAG (Retrieval Augmented Generation) temelli bir chatbot geliştirerek, Dr. Begüm Çıvgın'ın "sistem.pdf" dosyasındaki Jeofizik ve Uzay Bilimleri bilgilerini sorgulamasını sağlamayı amaçlamıştır[cite: 2]. Amaç, yalnızca verilen kaynaktan bilgi çekerek güvenilir ve halüsinasyonsuz cevaplar üretmektir.
+Bu proje, RAG (Retrieval Augmented Generation) temelli bir chatbot geliştirerek, Dr. Begüm Çıvgın'ın "sistem.pdf" dosyasındaki Jeofizik ve Uzay Bilimleri bilgilerini sorgulamasını sağlamayı amaçlamıştır[cite: 2]. Amaç, yalnızca verilen kaynaktan bilgi çekerek güvenilir ve halüsinasyonsuz cevaplar üretmektir.
 
 ### 2 - Veri Seti Hakkında Bilgi
 [cite_start]Kullanılan veri seti, Dr. Begüm Çıvgın'ın 2019 tarihli "GENEL JEOFIZIK" ders notlarından ("sistem.pdf") alınmıştır[cite: 72, 101, 140, 154, 169, 197, 237, 282, 309, 350, 383, 411, 441, 479]. İçeriği; [cite_start]Güneş Sistemi, gezegenlerin yapısı, gezegen tanımları, Dünya'nın dış/iç katmanları (Atmosfer, Litosfer, Manto, Çekirdek) ve Jeofiziğin uygulama alanları gibi temel bilimsel konuları kapsamaktadır[cite: 49, 104, 162, 171, 239, 245, 263, 449].
@@ -34,4 +34,5 @@ Geliştirilen chatbot, belirlenen kısıtlamalara uyarak yüksek doğrulukla ça
 * **Kısıtlı Cevaplama (Halüsinasyon Engelleme):** PDF'te olmayan (örneğin spor veya siyaset) sorulara nazikçe "Üzgünüm, bu bilgiye sağlanan kaynakta yeterince detaylı ulaşılamamaktadır." şeklinde geri dönüş yapar.
 
 ### Web Linkiniz
+
 [BURAYA PROJENİZİ YAYINLADIYSANIZ CANLI LİNKİ EKLEMELİSİNİZ.]
