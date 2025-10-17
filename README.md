@@ -26,7 +26,7 @@ Proje, LangChain çerçevesinde kurulmuş çok katmanlı bir RAG pipeline'ından
 | Komponent | Kullanılan Teknoloji | Optimizasyon ve Fonksiyonu |
 | :---: | :--- | :--- |
 | **Mimari** | Retrieval Augmented Generation (RAG) | **Kaynağa dayalı, halüsinasyonsuz cevap üretimi.** |
-| **Veri İşleme** | `pdfplumber` & `RecursiveCharacterTextSplitter` | **Kritik Çözüm:** Standart `PyPDFLoader` hataları nedeniyle `pdfplumber` ile **manuel metin çıkarma** ve ardından `1000/200` boyutlarında, tüm bilgiyi kapsayan sağlam (`robust`) parçalara ayırma. |
+| **Veri İşleme** | `pdfplumber` ve `RecursiveCharacterTextSplitter` | **Kritik Çözüm:** Standart `PyPDFLoader` hataları nedeniyle `pdfplumber` ile **manuel metin çıkarma** ve ardından `1000/200` boyutlarında, tüm bilgiyi kapsayan sağlam (`robust`) parçalara ayırma. |
 | **Gömme (Embedding)** | Google `text-embedding-004` | Metinlerin anlam uzayında temsil edilerek yüksek alaka düzeyinde arama yapılmasını sağlar. |
 | **Vektör DB** | ChromaDB | Vektörlerin lokal olarak depolanması ve hızlı arama yapılması. |
 | **Arama (Retriever)** | MultiQuery Retriever + `k=12` | Tek bir kullanıcı sorgusu yerine, model tarafından oluşturulan 3 farklı sorgu ile veritabanının aranması (**Çoklu Sorgu Zekası**). Bu, cevabı bulma olasılığını katlar. |
@@ -59,6 +59,7 @@ Bu RAG chatbotu, uygulanan optimizasyonlar sayesinde en zorlu sorulara bile yük
 ### Web Linkiniz
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
