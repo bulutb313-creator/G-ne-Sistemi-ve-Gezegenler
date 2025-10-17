@@ -1,10 +1,10 @@
 # Jeofizik ve Uzay Bilimleri RAG Chatbotu
 
 ### 1 - Projenin Amacı
-Bu proje, RAG (Retrieval Augmented Generation) temelli bir chatbot geliştirerek, Dr. Begüm Çıvgın'ın "sistem.pdf" dosyasındaki Jeofizik ve Uzay Bilimleri bilgilerini sorgulamasını sağlamayı amaçlamıştır[cite: 2]. Amaç, yalnızca verilen kaynaktan bilgi çekerek güvenilir ve halüsinasyonsuz cevaplar üretmektir.
+Bu proje, RAG (Retrieval Augmented Generation) temelli bir chatbot geliştirerek, Dr. Begüm Çıvgın'ın "sistem.pdf" dosyasındaki Jeofizik ve Uzay Bilimleri bilgilerini sorgulamasını sağlamayı amaçlamıştır. Amaç, yalnızca verilen kaynaktan bilgi çekerek güvenilir ve halüsinasyonsuz cevaplar üretmektir.
 
 ### 2 - Veri Seti Hakkında Bilgi
-[cite_start]Kullanılan veri seti, Dr. Begüm Çıvgın'ın 2019 tarihli "GENEL JEOFIZIK" ders notlarından ("sistem.pdf") alınmıştır[cite: 72, 101, 140, 154, 169, 197, 237, 282, 309, 350, 383, 411, 441, 479]. İçeriği; [cite_start]Güneş Sistemi, gezegenlerin yapısı, gezegen tanımları, Dünya'nın dış/iç katmanları (Atmosfer, Litosfer, Manto, Çekirdek) ve Jeofiziğin uygulama alanları gibi temel bilimsel konuları kapsamaktadır[cite: 49, 104, 162, 171, 239, 245, 263, 449].
+Kullanılan veri seti, Dr. Begüm Çıvgın'ın 2019 tarihli "GENEL JEOFIZIK" ders notlarından ("sistem.pdf") alınmıştır[cite: 72, 101, 140, 154, 169, 197, 237, 282, 309, 350, 383, 411, 441, 479]. İçeriği; Güneş Sistemi, gezegenlerin yapısı, gezegen tanımları, Dünya'nın dış/iç katmanları (Atmosfer, Litosfer, Manto, Çekirdek) ve Jeofiziğin uygulama alanları gibi temel bilimsel konuları kapsamaktadır[cite: 49, 104, 162, 171, 239, 245, 263, 449].
 
 ### 4 - Çözüm Mimarisi ve Kullanılan Yöntemler
 [cite_start]Proje, RAG mimarisine dayanmaktadır[cite: 2]. Kullanılan temel teknolojiler ve yöntemler:
@@ -15,7 +15,7 @@ Bu proje, RAG (Retrieval Augmented Generation) temelli bir chatbot geliştirerek
 * [cite_start]**Web Arayüzü:** Streamlit [cite: 25] (Kullanıcı arayüzü ve sunum için).
 
 ### 3 - Kodun Çalışma Kılavuzu (Local Ortam)
-[cite_start]Kodun çalıştırılabilmesi için gereken adımlar aşağıdadır[cite: 19, 21]:
+Kodun çalıştırılabilmesi için gereken adımlar aşağıdadır:
 
 1.  **Gerekli Kütüphaneler:** Proje dizinindeki `requirements.txt` dosyasını kullanarak tüm bağımlılıkları kurun:
     ```bash
@@ -30,9 +30,10 @@ Bu proje, RAG (Retrieval Augmented Generation) temelli bir chatbot geliştirerek
 
 ### 5 - Elde Edilen Sonuçlar ve Kabiliyetler
 Geliştirilen chatbot, belirlenen kısıtlamalara uyarak yüksek doğrulukla çalışmaktadır:
-* [cite_start]**Başarılı Sorgulama:** Yer kabuğu ile manto arasındaki sınırın adı Mohorovicic Süreksizliği (Moho)'dur[cite: 380].
+* **Başarılı Sorgulama:** Yer kabuğu ile manto arasındaki sınırın adı Mohorovicic Süreksizliği (Moho)'dur[cite: 380].
 * **Kısıtlı Cevaplama (Halüsinasyon Engelleme):** PDF'te olmayan (örneğin spor veya siyaset) sorulara nazikçe "Üzgünüm, bu bilgiye sağlanan kaynakta yeterince detaylı ulaşılamamaktadır." şeklinde geri dönüş yapar.
 
 ### Web Linkiniz
 
 [BURAYA PROJENİZİ YAYINLADIYSANIZ CANLI LİNKİ EKLEMELİSİNİZ.]
+
