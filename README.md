@@ -63,12 +63,13 @@ Projenin RAG mimarisi, yüksek performans ve doğru bağlam çekimini garanti et
 * **Çalışma Akışı:** Kullanıcı, arayüze ulaştıktan sonra sorularını iletir. **Canlı linkte bizi nasıl bir çalışma akışının beklediği** bu bölümün detaylarında yer alır.
 * **Kabiliyetlerin Testi:** Projenin kabiliyetleri, aşağıdaki test senaryoları ile doğrulanabilir:
     1.  **Sentez Testi:** Model, birden fazla kaynaktan bilgi çekip birleştirerek ("Gezegenleri büyükten küçüğe sırala ve Dünya'nın dış katmanlarını anlat.") detaylı cevaplar üretir.
-    2.  **Halüsinasyon Testi:** Kaynak dışı sorgulara ("Yerel seçimlerin sonuçları..."), **"Bu konuda elimde yeterli bilgi yok."** yanıtını vererek sistemin güvenilirliği kanıtlanır.
+    2.  **Halüsinasyon Testi:** Kaynak dışı sorgulara , **"Bu konuda elimde yeterli bilgi yok."** yanıtını vererek sistemin güvenilirliği kanıtlanır.
 
 
 ### Web Linkiniz
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
