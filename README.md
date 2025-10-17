@@ -37,4 +37,5 @@ Bu projenin yerel bir makinede çalıştırılması için gerekli adımlar:
 * **Kısıtlı Cevaplama:** Kaynakta bilgi olmadığında "Bu konuda elimde yeterli bilgi yok." şeklinde net bir geri dönüş yapar.
 
 ### Web Linkiniz
-[BURAYA, NGROK İLE ALDIĞINIZ CANLI CHATBOT ADRESİNİ YAPIŞTIRMALISINIZ.]
+
+[(https://anabelle-monadistic-tomoko.ngrok-free.dev/)]
