@@ -40,8 +40,10 @@ Bu projenin yerel bir makinede çalıştırılması için gerekli adımlar:
 * **Detaylı Sentez ve Kıyaslama Yeteneği:** Model, retriever tarafından çekilen birden fazla farklı metin parçasını birleştirerek ("Dünya'nın Manto katmanının Kabuk ile farkları nelerdir?" gibi) karmaşık ve karşılaştırmalı sorulara akıcı, bütünleşik cevaplar üretir.
 * **Yüksek Doğruluk:** Chatbot, "Yer kabuğu ile manto arasındaki sınıra ne ad verilir?" gibi spesifik sorulara **"Mohorovicic Süreksizliği (Moho)"** yanıtını vererek bilginin doğru çekildiğini kanıtlar.
 
+
 ### Web Linkiniz
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
