@@ -1,42 +1,40 @@
-# 🚀 GÜNEŞ SİSTEMİ VE GEZEGENLER RAG CHATBOTU 🪐
+# 🚀 GÜNETES SİSTEMİ VE GEZEGENLER RAG CHATBOTU 🪐
 
 ### PROJENİN GENEL ÖZETİ
-Bu proje, Akbank GenAI Bootcamp'in temel gereksinimi olan **Retrieval Augmented Generation (RAG)** mimarisi üzerine inşa edilmiştir. Geliştirilen chatbot, bilimsel bir kaynak olan **sistem.pdf** içeriğini kullanarak, kullanıcılardan gelen sorgulara yüksek doğruluk ve bağlamsal zenginlikte yanıtlar üretmektedir. Projenin temel başarısı, bir dil modelini (Gemini) kaynağa dayandırarak halüsinasyon riskini ortadan kaldırmasıdır.
+Bu proje, Akbank GenAI Bootcamp'in zorunlu gereksinimi olan **Retrieval Augmented Generation (RAG)** mimarisi üzerine inşa edilmiştir. Geliştirilen chatbot, harici bir kaynak olan **sistem.pdf** içeriğini kullanarak, yüksek doğruluk ve güvenilirlikte yanıtlar üretmektedir. Projenin temel amacı, bir dil modelini (Gemini) *sadece* kaynağa dayandırarak halüsinasyon riskini ortadan kaldırmaktır.
 
 ---
 
-### 1 - GELİŞTİRME ORTAMI (GİTHUB & README.MD) 
+### 1 - GELİŞTİRME ORTAMI (GİTHUB & README.MD)
 
-Bu kriter, kodun sergilenebilirliğini ve erişilebilirliğini garanti eder:
-
-* **GitHub Reposu:** Tüm proje dosyaları (`app.py`, `requirements.txt`, `sistem.pdf`) GitHub üzerinde sergilenmektedir.
-* **Teknik Anlatımlar:** Tüm teknik mimari, Python dosyanızda yorum satırları içerisinde  ve bu `README.md` dosyasında detaylandırılmıştır.
-* **README.md İçeriği:** Projenin amacı , veri seti hakkında bilgi , kullanılan yöntemler ve elde edilen sonuçlar  özetlenmiştir.
+* **GitHub & Kod Sergileme:** Projenin kodu, aşağıdaki kriterlere uygun bir biçimde GitHub'da sergilenmektedir.
+* **Teknik Anlatımlar:** Tüm teknik anlatımlar bu `README.md` dosyasında detaylandırılmıştır.
 * **Canlı Bağlantı:** **Web Linki (Deploy Linki)**, README.md'nin sonunda mutlaka paylaşılmıştır.
 
 ---
 
-### 2 - VERİ SETİ HAZIRLAMA 
-
-* **Veri Kaynağı:** Dr. Begüm Çıvgın'ın "GENEL JEOFIZIK" ders notları olan hazır bir veri seti (`sistem.pdf`) kullanılmıştır.
-* **İçerik Kapsamı:** Güneş Sistemi'nin oluşumu, gezegen özellikleri, Dünya'nın katmanları (Atmosfer, Manto, Çekirdek) gibi Jeofizik konularını içerir.
-* **Hazırlanış Metodolojisi (Kritik Çözüm):** PDF formatının getirdiği yapısal zorluklar nedeniyle, standart metin yükleyicileri başarısız olmuştur. Bu durum, **`pdfplumber`** ile manuel metin çıkarımını ve ardından **`RecursiveCharacterTextSplitter`** ile parçalama tekniğini zorunlu kılmıştır. Bu sayede, tüm metin (yaklaşık 41 parça) başarıyla işlenmiştir.
+### 2 - VERİ SETİ HAZIRLAMA
+* **Veri Kaynağı:** Dr. Begüm Çıvgın'ın "GENEL JEOFIZIK" ders notları (`sistem.pdf`) kullanılmıştır.
+* **Hazırlanış Metodolojisi (Kritik Çözüm):**
+    * **Metin Çıkarımı:** PDF'ten metin çıkarımı, hataları önlemek için daha sağlam olan **`pdfplumber`** ile yapılmıştır.
+    * **Parçalama:** Metin, **`RecursiveCharacterTextSplitter`** kullanılarak 1000 karakter boyutu ve 200 karakter örtüşme (overlap) ile parçalara (chunks) ayrılmıştır.
 
 ---
 
-### 3 - KODUN ÇALIŞMA KILAVUZU (LOCAL ORTAM) 
+### 3 - KODUN ÇALIŞMA KILAVUZU (LOCAL ORTAM)
 
-Bu aşama, kodun başka bir ortamda çalıştırılması için gereken tüm adımları detaylandırır.
+Bu aşama, kodun başka bir ortamda çalıştırılması için gereken tüm adımları detaylandırır ve profesyonel izolasyonu vurgular:
 
-1.  **Geliştirme Ortamı Kurulumu:**
-    * Sanal ortam (Virtual Environment) kurulumu gereklidir.
+1.  **Geliştirme Ortamı Kurulumu (İzole Ortam Yaratma):**
+    * **Gerekçe:** Proje bağımlılıkları arasındaki çatışmayı önlemek için sanal ortam (Virtual Environment) oluşturulmalıdır.
+    * **Komut:** `python -m venv venv` ve ardından ortam etkinleştirilir.
 2.  **Bağımlılıkların Kurulumu (`requirements.txt`):**
-    * Tüm proje bağımlılıkları, `requirements.txt` dosyası kullanılarak tek komutla kurulur:
+    * Tüm proje bağımlılıkları, `requirements.txt` dosyası kullanılarak kurulur:
         ```bash
         pip install -r requirements.txt
         ```
 3.  **API Anahtarı Tanımlama:**
-    * Google Gemini API Anahtarı, uygulamanın kod yürütülmesinden önce ortam değişkenine tanımlanmalıdır.
+    * Gemini API Anahtarı, uygulamanın çalıştırılmasından önce ortam değişkenine (`GEMINI_API_KEY`) tanımlanmalıdır.
 4.  **Uygulamanın Başlatılması:**
     * Ana Python betiği (`app.py`) çalıştırılarak Streamlit web arayüzü başlatılır:
         ```bash
@@ -45,30 +43,27 @@ Bu aşama, kodun başka bir ortamda çalıştırılması için gereken tüm adı
 
 ---
 
-### 4 - ÇÖZÜM MİMARİNİZ 
-
-Projenin RAG mimarisi, yüksek performans ve doğru bağlam çekimini garanti etmek üzere tasarlanmıştır:
+### 4 - ÇÖZÜM MİMARİNİZ
 
 * **Mimari:** RAG (Retrieval Augmented Generation).
-* **Çözülen Problem:** LLM'in genel bilgi yerine, sadece `sistem.pdf`'teki veriyi kullanmasını sağlayarak bilginin güvenilirliğini artırma problemi çözülmüştür.
 * **Teknolojiler:** Gemini 2.5 Flash, ChromaDB, MultiQuery Retriever, LangChain.
-* **Arama Optimizasyonu:** **MultiQuery Retriever** ve **k=12** ayarları kullanılmıştır. Bu, chatbot'un tek bir sorguyu birden fazla kez aratarak cevabı bulma şansını en üst düzeye çıkarır.
+* **Arama Optimizasyonu (Kapsamlı Sentez):** **MultiQuery Retriever** ve **k=12** ayarları kullanılmıştır. Bu, chatbot'un tek bir sorguyu birden fazla kez aratarak cevabı bulma şansını ve sentez yeteneğini en üst düzeye çıkarır.
 
 ---
 
-### 5 - WEB ARAYÜZÜ & PRODUCT KILAVUZU 
+### 5 - WEB ARAYÜZÜ & PRODUCT KILAVUZU
 
 * **Arayüz Teknolojisi:** Streamlit.
 * **Deploy Linki:** Canlı web adresi (`https://...`) bu `README.md`'nin sonunda paylaşılmıştır.
-* **Çalışma Akışı:** Kullanıcı, arayüze ulaştıktan sonra sorularını iletir. **Canlı linkte bizi nasıl bir çalışma akışının beklediği** bu bölümün detaylarında yer alır.
-* **Kabiliyetlerin Testi:** Projenin kabiliyetleri, aşağıdaki test senaryoları ile doğrulanabilir:
-    1.  **Sentez Testi:** Model, birden fazla kaynaktan bilgi çekip birleştirerek ("Gezegenleri büyükten küçüğe sırala ve Dünya'nın dış katmanlarını anlat.") detaylı cevaplar üretir.
-    2.  **Halüsinasyon Testi:** Kaynak dışı sorgulara , **"Bu konuda elimde yeterli bilgi yok."** yanıtını vererek sistemin güvenilirliği kanıtlanır.
+* **Kabiliyetlerin Testi:**
+    * **Sentez Testi:** Model, birden fazla kaynaktan bilgi çekip birleştirerek ("Gezegenleri büyükten küçüğe sırala ve Dünya'nın dış katmanlarını anlat.") detaylı cevaplar üretir.
+    * **Halüsinasyon Testi:** Kaynak dışı sorgulara , **"Bu konuda elimde yeterli bilgi yok."** yanıtını vererek sistemin güvenilirliği kanıtlanır.
 
 
 ### Web Linki
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
