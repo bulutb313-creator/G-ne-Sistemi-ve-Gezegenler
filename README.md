@@ -1,64 +1,78 @@
-### 🚀 GÜNEŞ SİSTEMİ VE GEZEGENLER RAG CHATBOTU 🪐
+# 🚀 GÜNEŞ SİSTEMİ VE GEZEGENLER RAG CHATBOTU 🪐
 
-### Projenin Genel Özeti
+### PROJENİN GENEL ÖZETİ
 
-Bu proje, Akbank GenAI Bootcamp'in zorunlu kriteri olan RAG (Retrieval Augmented Generation) mimarisini kullanarak geliştirilmiştir. Nihai ürün, bir web arayüzü üzerinden sunulan ve kaynağa bağlılığı esas alan bir soru-cevap asistanıdır. Chatbot, harici, yapısal olarak zorlu bir bilimsel kaynak olan **sistem.pdf** içeriği hakkında yüksek doğrulukla yanıtlar üretmek üzere tasarlanmıştır.
+Bu proje, Akbank GenAI Bootcamp'in temel gereksinimi olan **Retrieval Augmented Generation (RAG)** mimarisi üzerine inşa edilmiştir. Geliştirilen chatbot, bilimsel ve teknik içerikli **`sistem.pdf`** kaynağını kullanarak, kullanıcılardan gelen doğal dil sorgularına yüksek doğruluk ve bağlamsal zenginlikte yanıtlar üretmektedir.
 
------
+Projenin temel başarısı, bir LLM'in (Gemini 2.5 Flash) erişimini harici, doğrulanmış bir bilgi kaynağı ile sınırlayarak, **halüsinasyon riskini ortadan kaldırmak** ve kaynağa dayalı güvenilir bir bilgi sistemi oluşturmaktır. Çıktı, Streamlit tabanlı bir web arayüzü üzerinden sunulmaktadır.
 
-### 1 - Projenin Amacı (Stratejik Hedefler)
+---
 
-Projenin temel stratejik amacı, basit bir LLM (Large Language Model) arayüzü olmaktan öte, **uzman bir bilgi sisteminin** temelini atmaktır.
+### 1 - GELİŞTİRME ORTAMI (GITHUB & README.MD)
 
-  * **Kaynak Kontrolü:** Yapay zeka modelini (Gemini) sadece kendisine sağlanan bilimsel metinle sınırlayarak, bilginin kaynağını kontrol altında tutmak ve üretilen cevapların güvenilirliğini maksimize etmek.
-  * **Akıcılık ve Güvenilirlik:** Prompt mühendisliği ile modelin çıktısını akıcı, detaylı ve insan konuşmasına yakın tutarken, eş zamanlı olarak halüsinasyon durumunda spesifik bir ret cevabı ile güvenilirliğini korumak.
+Bu proje, aşağıdaki kriterlere tam uyum sağlamaktadır:
+* Projenin kaynak kodu (`.ipynb` veya `.py` uzantılı) GitHub üzerinde sergilenmektedir.
+* **README.md** dosyası, projenin Amacı, Veri Seti, Kullanılan Yöntemler ve Elde Edilen Sonuçları detaylı ve profesyonel bir dille özetlemektedir.
+* Tüm teknik anlatımlar ve mimari detaylar bu README.md içerisinde yer almaktadır.
+* **Web Linki (Deploy Linki)**, README.md'nin en sonunda mutlaka paylaşılmıştır.
 
-### 2 - Veri Seti Hakkında Bilgi (Kaynak ve Zorluk Analizi)
+---
 
-  * **Kaynak:** Dr. Begüm Çıvgın'ın "GENEL JEOFIZIK" ders notları ("sistem.pdf").
-  * **Kapsam:** Güneş Sistemi'nin oluşum teorileri, gezegenlerin nicel ve nitel özellikleri, Dünya'nın ana katmanlarının (Atmosfer, Hidrosfer, Biyosfer, Litosfer, Manto, Çekirdek) kimyasal ve fiziksel bileşimleri.
-  * **Format Zorluğu:** PDF, metin çıkarımını zorlaştıran çeşitli düzen, tablo ve sayfa sonu sorunları içermektedir. Bu, standart RAG yükleyicileri için kritik hatalara yol açmıştır (bkz. Çözüm Mimarisi).
+### 2 - VERİ SETİ HAZIRLAMA
 
-### 4 - Çözüm Mimarisi ve Kullanılan Yöntemler (Teknik Derinlik)
+* **Veri Kaynağı:** Dr. Begüm Çıvgın'ın "GENEL JEOFIZIK" ders notları (`sistem.pdf`).
+* **İçerik Kapsamı:** Güneş Sistemi'nin oluşum hipotezleri, Gezegenlerin (Merkür'den Neptün'e) hacim, yoğunluk ve yüzey özellikleri, Dünya'nın katmanları (Atmosfer, Hidrosfer) ve Jeofizik detayları (Manto, Çekirdek, Süreksizlikler).
+* **Hazırlanış Metodolojisi (Kritik Çözüm):** PDF formatının getirdiği yapısal zorluklar nedeniyle, standart metin yükleyicileri yerine daha sağlam bir yöntem benimsenmiştir:
+    1.  **`pdfplumber`** kütüphanesi ile PDF'ten metin çıkarımı manuel olarak yapılmıştır.
+    2.  Metin içeriği, **`RecursiveCharacterTextSplitter`** kullanılarak 1000 karakter boyutu ve 200 karakter örtüşme (overlap) ile parçalara (chunks) ayrılmış, böylece bağlamsal bütünlük korunmuştur.
 
-Proje, LangChain çerçevesinde kurulmuş çok katmanlı bir RAG pipeline'ından oluşur:
+---
 
-| Komponent | Kullanılan Teknoloji | Optimizasyon ve Fonksiyonu |
-| :---: | :--- | :--- |
-| **Mimari** | Retrieval Augmented Generation (RAG) | **Kaynağa dayalı, halüsinasyonsuz cevap üretimi.** |
-| **Veri İşleme** | `pdfplumber` ve `RecursiveCharacterTextSplitter` | **Kritik Çözüm:** Standart `PyPDFLoader` hataları nedeniyle `pdfplumber` ile **manuel metin çıkarma** ve ardından `1000/200` boyutlarında, tüm bilgiyi kapsayan sağlam (`robust`) parçalara ayırma. |
-| **Gömme (Embedding)** | Google `text-embedding-004` | Metinlerin anlam uzayında temsil edilerek yüksek alaka düzeyinde arama yapılmasını sağlar. |
-| **Vektör DB** | ChromaDB | Vektörlerin lokal olarak depolanması ve hızlı arama yapılması. |
-| **Arama (Retriever)** | MultiQuery Retriever + `k=12` | Tek bir kullanıcı sorgusu yerine, model tarafından oluşturulan 3 farklı sorgu ile veritabanının aranması (**Çoklu Sorgu Zekası**). Bu, cevabı bulma olasılığını katlar. |
-| **Üretim (LLM)** | Gemini 2.5 Flash ($T=0.2$) | Cevap sentezi ve dil üretimi. Düşük sıcaklık (`T=0.2`), çıktının akıcı ancak kaynağa sadık kalmasını sağlar. |
-| **Web Arayüzü** | Streamlit | Kodun, minimal CSS ve emojilerle zenginleştirilmiş, etkileşimli bir sohbet arayüzüne dönüştürülmesi. |
+### 3 - KODUN ÇALIŞMA KILAVUZU
 
-### 3 - Kodun Çalışma Kılavuzu (Local Ortam)
+Projenin yerel veya bulut ortamında (Colab, Kaggle) çalıştırılması için gerekli adımlar:
 
-Bu projenin yerel bir makinede çalıştırılması için gereken adımlar:
-
-1.  **Gerekli Kütüphaneler:** Proje klasöründeki `requirements.txt` dosyasını kullanarak tüm bağımlılıkları tek seferde kurun:
+1.  **Bağımlılıkların Kurulumu (requirements.txt):** Tüm proje bağımlılıklarını içeren `requirements.txt` dosyası kullanılarak kurulum yapılır.
     ```bash
     pip install -r requirements.txt
     ```
-2.  **API Anahtarı Tanımlama:** Google Gemini API Anahtarınızı, kodun çalıştırılmasından önce **`GEMINI_API_KEY`** ortam değişkenine tanımlamanız zorunludur.
-3.  **Başlatma:** `app.py` dosyasını çalıştırarak Streamlit arayüzünü başlatın:
+2.  **API Anahtarı Tanımlama:** Google AI Studio'dan alınan Gemini API Anahtarı, kodun çalıştırılmasından önce ortam değişkenine tanımlanmalıdır.
+    ```bash
+    export GEMINI_API_KEY='SİZİN_ANAHTARINIZ'
+    ```
+3.  **Uygulamanın Başlatılması:** Streamlit web arayüzü, Python betiği (`app.py` veya kullanılan notebook) üzerinden çalıştırılır.
     ```bash
     streamlit run app.py
     ```
 
-### 5 - Elde Edilen Sonuçlar ve Kabiliyetler (Kanıtlanmış Başarı)
+---
 
-Bu RAG chatbotu, uygulanan optimizasyonlar sayesinde en zorlu sorulara bile yüksek performansla yanıt verir:
+### 4 - ÇÖZÜM MİMARİNİZ
 
-  * **Sentez ve Kıyaslama Yeteneği (İleri Zeka):** Model, **MultiQuery** arama sonuçlarından çekilen 12 farklı metin parçasını birleştirerek ("Dünya'nın Manto katmanının Kabuk ile farkları nelerdir?") gibi karmaşık, çoklu bilgi gerektiren sorulara akıcı, bütünleşik ve karşılaştırmalı cevaplar üretir.
-  * **Yüksek Doğruluk ve Kaynak Kontrolü:** Chatbot, "Yer kabuğu ile manto arasındaki sınıra ne ad verilir?" gibi spesifik bilimsel terminoloji sorularına **"Mohorovicic Süreksizliği (Moho)"** yanıtını vererek bilginin doğru ve kesin çekildiğini kanıtlar.
-  * **RAG Güvenirliği ve Halüsinasyon Engelleme:** Kaynakta bilgi olmadığında ("Yerel seçimlerin sonuçları hakkında bilgi verir misin?") model, **"Bu konuda elimde yeterli bilgi yok."** yanıtını vererek, projenin temel güvenilirlik kriterini başarıyla yerine getirir.
-    
+Kullanılan RAG mimarisi, yüksek performans ve doğru bağlam çekimini garanti etmek üzere optimize edilmiştir:
+
+* **Temel Problem Çözümü:** Proje, Gemini gibi güçlü bir dil modelinin bilgisini genişletmek yerine, onun **bilgi kaynağını kısıtlayarak** ve sadece *`sistem.pdf`*'e dayandırarak güvenilirliğini artırma problemini çözer.
+* **Gömme Modeli:** **Google `text-embedding-004`** kullanılmıştır. Bu model, semantic (anlamsal) aramada yüksek alaka düzeyini garanti eder.
+* **Vektör Veritabanı:** **ChromaDB**, parçalanan metinlerin vektörlerini depolamak için hızlı ve hafif bir çözüm sunar.
+* **Retriever Optimizasyonu (MultiQuery):** Sistemin en kritik zeka katmanıdır. Kullanıcıdan gelen tek bir sorguyu, **LLM'e 3 farklı sorguya dönüştürterek** veritabanında arama yapar. Bu teknik, zorlu ve dolaylı soruların bile bağlamını bulma oranını dramatik şekilde artırır.
+* **LLM ve Prompt Mühendisliği:** **Gemini 2.5 Flash ($T=0.2$)** modeli kullanılmış ve Prompt, cevabın **AKICI, LİSTELER KULLANAN ve EN KAPSAMLI ŞEKİLDE DETAYLI** olmasını şart koşmuştur.
+
+---
+
+### 5 - WEB ARAYÜZÜ & PRODUCT KILAVUZU
+
+* **Arayüz Teknolojisi:** Streamlit
+* **Çalışma Akışı:** Kullanıcı, canlı linke ulaştıktan sonra sohbet arayüzüne **Güneş Sistemi** veya **Dünya'nın iç yapısı** ile ilgili doğal dil sorularını yazar. Model, anında ve kaynağa dayalı cevaplar üretir.
+* **Kabiliyetlerin Testi:** Projenin başarısını doğrulamak için aşağıdaki test senaryoları uygulanmalıdır:
+    1.  **Sentez Testi:** "Gezegenleri büyükten küçüğe sırala ve Dünya'nın dış katmanlarını anlat." (Farklı sayfalardaki bilgiyi birleştirme)
+    2.  **Doğruluk Testi:** "Atmosferin katmanları nelerdir ve troposferin sıcaklığı nasıl değişir?" (Detaylı bilimsel bilgi çekimi)
+    3.  **Halüsinasyon Testi:** "Yerel seçimlerin sonuçları hakkında bilgi verir misin?" (**"Bu konuda elimde yeterli bilgi yok."** yanıtı alınmalıdır.)
+
 
 ### Web Linkiniz
 
 [https://anabelle-monadistic-tomoko.ngrok-free.dev/]
+
 
 
 
