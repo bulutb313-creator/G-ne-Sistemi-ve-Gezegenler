@@ -1,0 +1,20 @@
+# Gerekli Kütüphaneler Listesi
+
+# RAG Mimarisi ve Çerçevesi
+langchain
+langchain-community
+
+# Gemini Modelleri (Generation ve Embedding)
+google-genai
+langchain-google-genai
+
+# Veri İşleme
+pypdf
+pdfplumber
+
+# Vektör Veritabanı
+chromadb
+
+# Web Arayüzü (Sunum)
+streamlit
+pyngrok
