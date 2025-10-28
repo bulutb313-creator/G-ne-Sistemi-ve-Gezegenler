@@ -2,18 +2,15 @@ import streamlit as st
 import os
 import pdfplumber 
 
-# --- Hata Giderilmiş ve Güncel Kütüphane Yolları ---
-# 1. Core ve Text Splitter (Yeni Konumlar)
-from langchain_core.prompts import PromptTemplate
-from langchain_core.documents import Document
+# --- KESİNLİKLE SON HATA GİDERİLMİŞ KÜTÜPHANE YOLLARI ---
+# PromptTemplate, Document, vb. artık 'core' paketlerden geliyor.
+from langchain_core.prompts import PromptTemplate 
+from langchain_core.documents import Document 
 from langchain_text_splitters import RecursiveCharacterTextSplitter 
-# 2. Gemini ve Community
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
-from langchain.chains import RetrievalQA
-# 3. HATANIN GİDERİLDİĞİ YER: MultiQueryRetriever'ı doğru paket olan 'langchain'den çağırıyoruz
-from langchain.retrievers.multi_query import MultiQueryRetriever # <-- SON DÜZELTME
-
+from langchain_community.retrievers import MultiQueryRetriever # MultiQuery artık community içinde
+from langchain.chains import RetrievalQA # LangChain'den import ediliyor
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
 @st.cache_resource
@@ -38,7 +35,7 @@ def get_rag_chain():
         embedding_model = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
         vectorstore = Chroma.from_documents(documents=texts, embedding=embedding_model)
 
-        # 3. RAG Zinciri Kurulumu (MultiQuery ve Analitik Prompt)
+        # 3. RAG Zinciri Kurulumu
         llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.2)
         base_retriever = vectorstore.as_retriever(search_kwargs={"k": 8})
         # MultiQueryRetriever kullanımı
@@ -46,6 +43,7 @@ def get_rag_chain():
 
         # ANALİTİK PROMPT ŞABLONU
         prompt_template = """Sen bir GÜNEŞ SİSTEMİ VE JEOFIZIK UZMANISIN. Görevin, sana verilen BAĞLAM'daki bilgileri ANALİZ EDEREK bir cevap SENTEZLEMEKTİR. Neden-sonuç ilişkileri kur, kıyaslamalar yap ve mantıksal çıkarımlar sun.
+
         Eğer cevap KESİNLİKLE BAĞLAM'da yoksa, sadece "Bu konuda elimde yeterli bilgi yok." diye cevap ver.
         BAĞLAM: {context}
         Soru: {question}
