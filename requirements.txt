@@ -1,0 +1,64 @@
+# Gerekli Kütüphaneler Listesi (Streamlit Cloud Uyumlu)
+langchain
+langchain-community
+google-genai
+langchain-google-genai
+pypdf
+pdfplumber
+chromadb
+streamlit
+
+# 2.2 Vektör Veritabanı Kurulumu ve RAG Testi (Hardcoded Veri Sorununu Çözen Blok)
+# Bu blok, PDF'i okur, vektör DB'yi kurar ve testi çalıştırır.
+import os
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain.chains import RetrievalQA
+from langchain.prompts import PromptTemplate
+from langchain_community.vectorstores import Chroma
+from langchain.docstore.document import Document
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.retrievers import MultiQueryRetriever
+import pdfplumber 
+
+vectorstore = None
+PDF_DOSYA_ADI = "sistem.pdf"
+file_path = PDF_DOSYA_ADI
+
+if not os.environ.get('GOOGLE_API_KEY'):
+    print("❌ RAG Testi İptal Edildi: API Anahtarı Ortam Değişkenlerinde Yok.")
+elif not os.path.exists(file_path):
+    print(f"❌ HATA: '{file_path}' dosyası bulunamadı. Lütfen 'sistem.pdf' dosyasını Colab'a yükleyin.")
+else:
+    try:
+        # Metin Çıkarma, Parçalama ve Vektör Veritabanı Oluşturma
+        full_text = ""
+        with pdfplumber.open(file_path) as pdf:
+            for page in pdf.pages:
+                full_text += page.extract_text() + "\n\n"
+        documents = [Document(page_content=full_text, metadata={"source": file_path})]
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, separators=["\n\n", "\n", " ", ""],)
+        texts = text_splitter.split_documents(documents)
+        
+        embedding_model = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
+        vectorstore = Chroma.from_documents(documents=texts, embedding=embedding_model)
+        print(f"✅ Vektör veritabanı kuruldu. {len(texts)} parça oluşturuldu.")
+
+        # RAG Zinciri Kurulumu ve Test
+        llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.2)
+        base_retriever = vectorstore.as_retriever(search_kwargs={"k": 12})
+        retriever = MultiQueryRetriever.from_llm(retriever=base_retriever, llm=llm)
+
+        prompt_template = """Sen bir GÜNEŞ SİSTEMİ VE JEOFIZIK UZMANISIN... [Devamı Sizin Başarılı Promptunuz]"""
+        PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
+        qa_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, chain_type_kwargs={"prompt": PROMPT})
+
+        test_sorusu = "Dünya'nın iç katmanlarının (Litosfer, Astenosfer, Mezosfer, Barisfer) temel fiziksel ve kimyasal özelliklerini ve aralarındaki geçiş sınırlarını detaylıca listeler misin?"
+        cevap = qa_chain.invoke(test_sorusu)
+
+        print("\n--- OPTİMİZE EDİLMİŞ RAG TEST SONUCU ---")
+        print(f"Soru: {test_sorusu}")
+        print(f"Cevap: {cevap['result'][:400]}...") # Cevabın bir kısmı gösteriliyor
+        print("-----------------------------------------------------")
+
+    except Exception as e:
+        print(f"❌ KRİTİK HATA: Veri işleme/RAG zinciri kurma hatası: {e}")
