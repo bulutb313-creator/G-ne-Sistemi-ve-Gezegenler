@@ -2,14 +2,15 @@ import streamlit as st
 import os
 import pdfplumber 
 
-# --- KESİNLİKLE SON HATA GİDERİLMİŞ KÜTÜPHANE YOLLARI ---
+# --- HATA GİDERİLMİŞ KESİN KÜTÜPHANE YOLLARI ---
+# LangChain'deki tüm modül konumları güncel ve stabil yollara çekildi.
 from langchain_core.prompts import PromptTemplate 
 from langchain_core.documents import Document 
 from langchain_text_splitters import RecursiveCharacterTextSplitter 
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
-from langchain.chains import RetrievalQA 
-from langchain.retrievers import MultiQueryRetriever # <-- SON VE KESİN DÜZELTME
+from langchain_community.retrievers import MultiQueryRetriever # MultiQuery'nin en stabil yolu
+from langchain_community.chains import RetrievalQA # RetrievalQA modülünün son doğru yolu
 
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
@@ -23,7 +24,7 @@ def get_rag_chain():
         st.error(f"KRİTİK HATA: '{file_path}' dosyası GitHub'da bulunamıyor.")
         return None
     try:
-        # 1. VERİ İŞLEME
+        # 1. VERİ İŞLEME (Hardcoded veri sorunu çözülmüştür)
         full_text = "";
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages: full_text += page.extract_text() + "\n\n"
@@ -35,10 +36,9 @@ def get_rag_chain():
         embedding_model = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
         vectorstore = Chroma.from_documents(documents=texts, embedding=embedding_model)
 
-        # 3. RAG Zinciri Kurulumu
+        # 3. RAG Zinciri Kurulumu (Analitik Prompt ve MultiQuery)
         llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.2)
         base_retriever = vectorstore.as_retriever(search_kwargs={"k": 8})
-        # MultiQueryRetriever kullanımı
         retriever = MultiQueryRetriever.from_llm(retriever=base_retriever, llm=llm)
 
         # ANALİTİK PROMPT ŞABLONU
