@@ -3,14 +3,14 @@ import os
 import pdfplumber 
 
 # --- KESİNLİKLE SON HATA GİDERİLMİŞ KÜTÜPHANE YOLLARI ---
-# Tüm modüllerin en stabil ve güncel paket yolları kullanıldı.
+# Core, Community ve MultiQuery için en stabil yollar kullanıldı.
 from langchain_core.prompts import PromptTemplate 
 from langchain_core.documents import Document 
-from langchain_text_splitters import RecursiveCharacterTextSplitter 
+from langchain_text_splitters import RecursiveCharacterTextSplitTER 
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
-from langchain_community.retrievers import MultiQueryRetriever
-from langchain.chains import RetrievalQA # <-- SON VE KESİN DÜZELTME
+from langchain_community.chains import RetrievalQA # RetrievalQA için stabil yol
+from langchain_community.retrievers import MultiQueryRetriever # MultiQuery için stabil yol
 
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
