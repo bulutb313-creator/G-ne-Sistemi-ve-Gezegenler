@@ -1,9 +1,8 @@
-%%writefile app.py
 import streamlit as st
 import os
 import pdfplumber 
 
-# --- HATA GİDERİLMİŞ KÜTÜPHANE YOLLARI (Import Düzeltmeleri) ---
+# --- Hata Giderilmiş ve Güncel Kütüphane Yolları ---
 from langchain.prompts import PromptTemplate
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -13,19 +12,19 @@ from langchain_community.retrievers import MultiQueryRetriever
 from langchain.chains import RetrievalQA
 
 
-# --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON (Veri Yükleme ve RAG Mimarisi) ---
+# --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
 @st.cache_resource
 def get_rag_chain():
-    """RAG sistemini kurar ve zinciri döndürür."""
+    """RAG sistemini kurar ve zinciri döndürür. Veri yükleme bu fonksiyon içinde yapılır."""
     PDF_DOSYA_ADI = "sistem.pdf"
     file_path = PDF_DOSYA_ADI
 
-    # 1. DOSYA KONTROLÜ (Streamlit Cloud'da dosya yoksa hata verir)
+    # 1. DOSYA KONTROLÜ
     if not os.path.exists(file_path):
         st.error(f"KRİTİK HATA: '{file_path}' dosyası GitHub'da bulunamıyor.")
         return None
     try:
-        # 2. VERİ İŞLEME (Hardcoded veriyi kaldıran çözüm)
+        # 2. VERİ İŞLEME (PDF Okuma ve Parçalama)
         full_text = "";
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages: full_text += page.extract_text() + "\n\n"
@@ -37,7 +36,7 @@ def get_rag_chain():
         embedding_model = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
         vectorstore = Chroma.from_documents(documents=texts, embedding=embedding_model)
 
-        # 4. RAG Zinciri Kurulumu (MultiQuery ve Analitik Prompt)
+        # 4. RAG Zinciri Kurulumu (Analitik Prompt)
         llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.2)
         base_retriever = vectorstore.as_retriever(search_kwargs={"k": 8})
         retriever = MultiQueryRetriever.from_llm(retriever=base_retriever, llm=llm)
@@ -79,7 +78,6 @@ def main():
         st.session_state.qa_chain = get_rag_chain()
         if st.session_state.qa_chain is None: return
 
-    # Sohbet Geçmişi ve Kullanıcı Girişi
     if "messages" not in st.session_state: st.session_state.messages = []
     for message in st.session_state.messages:
         with st.chat_message(message["role"]): st.markdown(message["content"])
