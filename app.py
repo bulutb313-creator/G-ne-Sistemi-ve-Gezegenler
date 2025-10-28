@@ -9,8 +9,8 @@ from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter 
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
-from langchain_community.chains import RetrievalQA 
-from langchain.retrievers.multi_query import MultiQueryRetriever # <-- SON VE KESİN DÜZELTME
+from langchain_community.chains import RetrievalQA # <-- SON VE KESİN DÜZELTME
+from langchain.retrievers.multi_query import MultiQueryRetriever # MultiQuery'nin en stabil yolu
 
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
