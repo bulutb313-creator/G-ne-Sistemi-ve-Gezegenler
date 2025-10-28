@@ -5,4 +5,3 @@ langchain-google-genai
 chromadb
 streamlit
 pdfplumber
-Eylem: Bu temiz listey
