@@ -9,8 +9,8 @@ from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter 
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
-from langchain.retrievers.multi_query import MultiQueryRetriever
-from langchain.chains import RetrievalQA # <-- SON VE KESİN DÜZELTME
+from langchain.chains import RetrievalQA # RetrievalQA'nın stabil yolu
+from langchain_community.retrievers import MultiQueryRetriever # <-- SON VE KESİN DÜZELTME
 
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
@@ -21,7 +21,7 @@ def get_rag_chain():
     file_path = PDF_DOSYA_ADI
 
     if not os.path.exists(file_path):
-        st.error(f"KRİTİK HATA: '{file_path}' dosyası GitHub'da bulunamıyor.")
+        st.error(f"KRİTİK HATA: '{file_path}' dosyası GitHub'da bulunmuyor.")
         return None
     try:
         # 1. VERİ İŞLEME (Hardcoded veri sorunu çözülmüştür)
