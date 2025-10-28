@@ -3,13 +3,14 @@ import os
 import pdfplumber 
 
 # --- KESİNLİKLE SON HATA GİDERİLMİŞ KÜTÜPHANE YOLLARI ---
+# Core, Community ve yeni yollar kullanıldı.
 from langchain_core.prompts import PromptTemplate 
 from langchain_core.documents import Document 
 from langchain_text_splitters import RecursiveCharacterTextSplitter 
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
-from langchain.chains import RetrievalQA 
-from langchain_community.retrievers import MultiQueryRetriever # <-- SON VE KESİN DÜZELTME
+from langchain_community.retrievers import MultiQueryRetriever 
+from langchain_community.chains import RetrievalQA # <-- SON VE KESİN DÜZELTME: Chains paketi Community içine taşınmıştır.
 
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
