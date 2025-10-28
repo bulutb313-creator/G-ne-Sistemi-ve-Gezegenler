@@ -2,14 +2,15 @@ import streamlit as st
 import os
 import pdfplumber 
 
-# --- Hata Giderilmiş ve Güncel Kütüphane Yolları ---
-from langchain.prompts import PromptTemplate
-from langchain.docstore.document import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+# --- KESİNLİKLE SON HATA GİDERİLMİŞ KÜTÜPHANE YOLLARI ---
+# PromptTemplate, Document ve RecursiveCharacterTextSplitter, Core paketlere taşınmıştır.
+from langchain_core.prompts import PromptTemplate # Düzeltildi
+from langchain_core.documents import Document # Düzeltildi
+from langchain_text_splitters import RecursiveCharacterTextSplitter # Doğru paket
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
 from langchain_community.retrievers import MultiQueryRetriever
-from langchain.chains import RetrievalQA
+from langchain.chains import RetrievalQA # Bu yol şimdilik kaldı
 
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
@@ -36,7 +37,7 @@ def get_rag_chain():
         embedding_model = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
         vectorstore = Chroma.from_documents(documents=texts, embedding=embedding_model)
 
-        # 4. RAG Zinciri Kurulumu (Analitik Prompt)
+        # 4. RAG Zinciri Kurulumu (MultiQuery ve Analitik Prompt)
         llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.2)
         base_retriever = vectorstore.as_retriever(search_kwargs={"k": 8})
         retriever = MultiQueryRetriever.from_llm(retriever=base_retriever, llm=llm)
@@ -66,7 +67,6 @@ def main():
     # API Anahtarını al ve kontrol et (Secrets'ı okur)
     if "GEMINI_API_KEY" not in os.environ:
         st.error("Lütfen Gemini API Anahtarınızı giriniz. Anahtar olmadan sistem çalışmaz.")
-        # Bu kısım sadece Secret'ı girmeyi unuttuğunuzda ekranda çıkar.
         key = st.text_input("Gemini API Anahtarı:", type="password", key="api_input") 
         if key:
             os.environ["GEMINI_API_KEY"] = key
