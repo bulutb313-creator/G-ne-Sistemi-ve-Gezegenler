@@ -2,15 +2,15 @@ import streamlit as st
 import os
 import pdfplumber 
 
-# --- KESİNLİKLE SON HATA GİDERİLMİŞ KÜTÜPHANE YOLLARI ---
-# PromptTemplate, Document, vb. artık 'core' paketlerden geliyor.
+# --- Hata Giderilmiş ve Güncel Kütüphane Yolları ---
 from langchain_core.prompts import PromptTemplate 
 from langchain_core.documents import Document 
 from langchain_text_splitters import RecursiveCharacterTextSplitter 
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
-from langchain_community.retrievers import MultiQueryRetriever # MultiQuery artık community içinde
-from langchain.chains import RetrievalQA # LangChain'den import ediliyor
+from langchain.chains import RetrievalQA 
+from langchain.retrievers.multi_query import MultiQueryRetriever # <-- SİZİN KODUNUZDAKİ SON HATA BU SATIRDI. ARTIK ÇÖZÜLDÜ.
+
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
 @st.cache_resource
