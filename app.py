@@ -3,14 +3,14 @@ import os
 import pdfplumber 
 
 # --- KESİNLİKLE SON HATA GİDERİLMİŞ KÜTÜPHANE YOLLARI ---
-# Hata veren 'langchain.chains' yerine, stabil olan 'langchain_community' yolu kullanıldı.
+# HATA DÜZELTİLDİ: 'RecursiveCharacterTextSplitter' doğru yazıldı.
 from langchain_core.prompts import PromptTemplate 
 from langchain_core.documents import Document 
-from langchain_text_splitTERS import RecursiveCharacterTextSplitter 
+from langchain_text_splitters import RecursiveCharacterTextSplitter 
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma 
-from langchain_community.chains import RetrievalQA # <--- SON VE KESİN DÜZELTME
-from langchain_community.retrievers import MultiQueryRetriever # MultiQuery'nin en stabil yolu
+from langchain_community.chains import RetrievalQA 
+from langchain.retrievers.multi_query import MultiQueryRetriever # MultiQuery'nin en stabil yolu
 
 
 # --- RAG ZİNCİRİNİ BAŞLATAN FONKSİYON ---
